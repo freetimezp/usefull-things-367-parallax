@@ -9,6 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let isMenuOpen = false;
     let isAnimating = false;
 
+    gsap.from(".hero h1 span", {
+        yPercent: 120,
+        stagger: 0.15,
+        duration: 1.4,
+        ease: "power4.out",
+    });
+
     menuToggle.addEventListener("click", () => {
         if (isAnimating) return;
 
@@ -16,16 +23,31 @@ document.addEventListener("DOMContentLoaded", () => {
         isAnimating = true;
 
         if (isMenuOpen) {
+            const menuItems = gsap.utils.toArray(".menu-item");
+
+            gsap.set(menuItems, {
+                y: 100,
+                opacity: 0,
+            });
+
             gsap.to(menuOverlay, {
                 opacity: 1,
-                duration: 0.5,
-                ease: "power3.out",
+                duration: 0.6,
                 onStart: () => {
                     menuOverlay.style.pointerEvents = "all";
                 },
                 onComplete: () => {
                     isAnimating = false;
                 },
+            });
+
+            gsap.to(menuItems, {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.06,
+                ease: "power4.out",
+                delay: 0.15,
             });
 
             menuToggleText.textContent = "Close"; // can show 1
@@ -68,16 +90,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const config = {
         canvasBg: "#1a1a1a",
-        modelPath: "./src/assets/models/model.glb",
+        modelPath: "./src/assets/models/model1.glb",
         metalness: 0.55,
         roughness: 0.75,
         baseZoom: 0.35,
         baseCamPosX: window.innerWidth < 1000 ? 0 : -0.75,
         baseCamPosY: -1.25,
         baseCamPosZ: 0,
+
         baseRotationX: 0,
         baseRotationY: 0,
         baseRotationZ: 0,
+
         ambientIntensity: 0.25,
         keyIntensity: 0.35,
         keyPosX: 2.5,
@@ -132,12 +156,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const keyLight = new THREE.DirectionalLight(0xffffff, config.keyIntensity);
     keyLight.position.set(config.keyPosX, config.keyPosY, config.keyPosZ);
     keyLight.castShadow = true;
+
     keyLight.shadow.mapSize.width = 4096;
     keyLight.shadow.mapSize.height = 4096;
     keyLight.shadow.camera.near = 0.1;
+
     keyLight.shadow.camera.far = 100;
     keyLight.shadow.bias = -0.00005;
     keyLight.shadow.normalBias = 0.05;
+
     scene.add(keyLight);
 
     const fillLight = new THREE.DirectionalLight(0xffffff, config.fillIntensity);
@@ -159,14 +186,20 @@ document.addEventListener("DOMContentLoaded", () => {
     loader.load(config.modelPath, (gltf) => {
         model = gltf.scene;
 
+        //for another model position, rotation, scale
+        //config.baseRotationX = 0.1;
+        //config.baseRotationY = -0.3;
+        //config.baseRotationZ = 0;
+        //model.position.set(-1, 0.1, 0);
+        //model.rotation.set(-0.1, 0.8, 0);
+        //model.scale.set(2, 2, 2);
+
         model.traverse((node) => {
             if (node.isMesh) {
                 node.castShadow = true;
                 node.receiveShadow = true;
 
                 if (node.material) {
-                    // node.material.metalness = config.metalness;
-                    // node.material.roughness = config.roughness;
                     node.material.needsUpdate = true;
                 }
             }
@@ -186,6 +219,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const maxDim = Math.max(size.x, size.y, size.z);
         camera.position.z = maxDim * config.baseZoom;
+
+        //for another model position z
+        //camera.position.z = 3;
+
         camera.lookAt(0, 0, 0);
 
         scene.add(model);
@@ -209,8 +246,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let mouseX = 0;
     let mouseY = 0;
+
     let targetRotationX = 0;
     let targetRotationY = 0;
+
     let currentRotationX = 0;
     let currentRotationY = 0;
 
@@ -225,6 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
         config.cursorLightDistance,
         config.cursorLightDecay
     );
+
     cursorLight.position.set(0, 0, config.cursorLightPosZ);
     cursorLight.visible = config.cursorLightEnabled;
     scene.add(cursorLight);

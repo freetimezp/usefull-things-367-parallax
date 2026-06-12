@@ -1,1 +1,48 @@
-https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqblp5RERJb3F0THhiNlk0T3RHOW9zcjBGejU1UXxBQ3Jtc0ttNlFkNFF3QjdLejBGUl93cFUxa2hic044SHp4Q25hRTl6c0NzTWhkRDFSaE45NmlhYUdWMDVGcFdUcDVHOVFMRmdIRHZjUnRkUDM1SkstZXJseGdJT25EdHZ0bU5kNDlpaTVOSTd3aFQwSi1qeXo2aw&q=https%3A%2F%2Fskfb.ly%2F6QUZ6&v=khu72P-R2fo
+https://sketchfab.com/3d-models/the-punishment-a-study-of-farnese-hercules-0b36d63fd4e44ab6b59088438d4da441
+
+https://sketchfab.com/3d-models/chibi-batman-for-3d-printing-5478daa5af44461ebe475927cd65bd91
+
+https://sketchfab.com/
+
+    const config = {
+        canvasBg: "#1a1a1a",
+        modelPath: "./src/assets/models/model1.glb",
+        metalness: 0.55,
+        roughness: 0.75,
+        baseZoom: 0.35,
+        baseCamPosX: window.innerWidth < 1000 ? 0 : -0.75,
+        baseCamPosY: -1.25,
+        baseCamPosZ: 0,
+
+        baseRotationX: 0,
+        baseRotationY: 0,
+        baseRotationZ: 0,
+
+        ambientIntensity: 0.25,
+        keyIntensity: 0.35,
+        keyPosX: 2.5,
+        keyPosY: 10,
+        keyPosZ: 10,
+        fillIntensity: 0.25,
+        fillPosX: -5,
+        fillPosY: 2.5,
+        fillPosZ: -2.5,
+        rimIntensity: 0.75,
+        rimPosX: -7.5,
+        rimPosY: 5,
+        rimPosZ: -10,
+        topIntensity: 0.25,
+        topPosX: 0,
+        topPosY: 15,
+        topPosZ: 0,
+        cursorLightEnabled: true,
+        cursorLightIntensity: 5.0,
+        cursorLightColor: 0xffffff,
+        cursorLightDistance: 7.5,
+        cursorLightDecay: 2,
+        cursorLightPosZ: 1,
+        cursorLightSmoothness: 0.5,
+        cursorLightScale: 1,
+        parallaxSensitivityX: 0.25,
+        parallaxSensitivityY: 0.25,
+    };

@@ -36,6 +36,11 @@ p {
     user-select: none;
 }
 
+.hero h1 span {
+    display: block;
+    overflow: hidden;
+}
+
 nav {
     position: fixed;
     width: 100%;
@@ -62,9 +67,14 @@ nav {
     left: 0;
     width: 100%;
     height: 100svh;
+
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+
     display: flex;
     justify-content: flex-end;
-    background-color: #1a1a1a;
+
     pointer-events: none;
     opacity: 0;
     will-change: opacity;
@@ -114,21 +124,4 @@ canvas {
 .hero h1 {
     width: 75%;
     color: #fff;
-}
-
-@media (max-width: 1000px) {
-    h1 {
-        font-size: 3rem;
-        letter-spacing: 0;
-    }
-    .hero h1 {
-        width: 100%;
-    }
-    .menu-links {
-        width: 100%;
-        padding: 2rem;
-    }
-    .menu-item a {
-        font-size: 2.5rem;
-    }
 }
